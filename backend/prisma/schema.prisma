@@ -1,0 +1,93 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// // model Registration {
+// //   id     Int     @id @default(autoincrement())
+// //   name   String
+// //   email  String  
+// //   paid   Boolean @default(false)
+// // }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // or "mysql" / "sqlite" — change as per your DB
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String? // Optional if using OAuth like GitHub
+  image     String?
+  events    Event[]  @relation("HostEvents")
+  createdAt DateTime @default(now())
+}
+model Registration {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  paid      Boolean  @default(false)
+  eventSlug String
+  createdAt DateTime @default(now())
+
+  // Optional: back relation to Event
+  event     Event?   @relation(fields: [eventSlug], references: [slug], onDelete: Cascade)
+}
+
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  slug        String   @unique
+  date        DateTime
+  tickets      Int?        
+  location String?
+  createdAt   DateTime @default(now())
+
+  // Relationships
+  createdBy   User     @relation("HostEvents", fields: [createdById], references: [id])
+  createdById String
+  registrations  Registration[]
+  participants Participant[]
+}
+
+
+model Participant {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   String
+  createdAt DateTime @default(now())
+}
+// model Registration {
+//   id        Int     @id @default(autoincrement())
+//   name      String
+//   email     String
+//   password  String
+//   eventSlug String  @default("placeholder") // temporary default
+//   paid      Boolean @default(false)
+//   createdAt DateTime @default(now())
+// }
+// model Registration {
+//   id        String   @id @default(cuid())
+//   name      String
+//   email     String
+//   paid      Boolean  @default(false)
+//   eventSlug String
+//   createdAt DateTime @default(now())
+
+//   // Optional: back relation to Event
+//   //event     Event?   @relation(fields: [eventSlug], references: [slug], onDelete: Cascade)
+// }

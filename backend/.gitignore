@@ -1,0 +1,67 @@
+# ─────────────────────────────────────────────────────────
+# Global
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.*.local
+node_modules/
+dist/
+build/
+.cache/
+.next/
+out/
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─────────────────────────────────────────────────────────
+# TypeScript
+*.tsbuildinfo
+
+# ─────────────────────────────────────────────────────────
+# Logs
+logs/
+*.log
+debug.log
+
+# ─────────────────────────────────────────────────────────
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/
+*.sqlite
+*.sqlite-journal
+
+# ─────────────────────────────────────────────────────────
+# Docker
+docker-compose.override.yml
+*.pid
+
+# ─────────────────────────────────────────────────────────
+# OS Specific
+*.swp
+*.swo
+*.bak
+
+# ─────────────────────────────────────────────────────────
+# Next.js (Frontend)
+.next/
+out/
+.vercel/
+public/static/
+
+# ─────────────────────────────────────────────────────────
+# Redis
+dump.rdb
+*.rdb
+*.aof
+
+# ─────────────────────────────────────────────────────────
+# Others
+coverage/
+test-output/
